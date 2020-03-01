@@ -23,7 +23,7 @@ server.use("/api/auth", authRouter);
 server.use("/api/users", restricted, userRouter);
 
 server.get("/", (req, res) => {
-  res.status(200).json({ api: "is live!" });
+  res.status(200).json({ "you can now": "Water-your-Plants!" });
 });
 
 module.exports = server;
