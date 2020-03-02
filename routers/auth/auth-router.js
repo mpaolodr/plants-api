@@ -11,25 +11,34 @@ router.post("/register", async (req, res) => {
 
   if (userData.username && userData.password && userData.phone_number) {
     try {
-      bc.hash(userData.password, 10, async (err, hash) => {
-        if (err) {
-          res.status(500).json({
-            error: "Sorry, we can't process your request at this moment"
-          });
-        } else {
-          userData.password = hash;
+      const existingUser = await Auth.getBy({ username: userData.username });
+      if (existingUser) {
+        res.status(500).json({ error: "User already exists" });
+      } else {
+        try {
+          bc.hash(userData.password, 10, async (err, hash) => {
+            if (err) {
+              res.status(500).json({
+                error: "Sorry, we can't process your request at this moment"
+              });
+            } else {
+              userData.password = hash;
 
-          const token = getToken({
-            username: userData.username,
-            password: userData.password
-          });
-          const user = await Auth.add(userData);
+              const token = getToken({
+                username: userData.username,
+                password: userData.password
+              });
+              const user = await Auth.add(userData);
 
-          res.status(201).json({ user, token });
+              res.status(201).json({ user, token });
+            }
+          });
+        } catch (err) {
+          res.status(500).json({ error: "Error connecting to server" });
         }
-      });
+      }
     } catch (err) {
-      res.status(500).json({ error: "Error connecting to server" });
+      res.status(500).json({ error: "User already exists" });
     }
   } else {
     res.status(400).json({ error: "Please provide required information" });
