@@ -27,7 +27,6 @@ exports.up = function(knex) {
       tbl
         .text("nickname", 255)
         .notNullable()
-        .unique()
         .index();
 
       tbl.text("h2o_frequency").notNullable();
