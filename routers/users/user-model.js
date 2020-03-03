@@ -13,12 +13,29 @@ function getPlants(id) {
     )
     .where({ "p.user_id": id });
 }
-
+// return user data upon login and i don't want to return the password
 function getUserById(id) {
   return db("users")
     .select("username", "phone_number")
     .where({ id })
     .first();
+}
+
+// just for editing
+function getUserWithPassword(id) {
+  return db("users")
+    .where({ id })
+    .first();
+}
+function updateUser(userData, id) {
+  return db("users")
+    .where({ id })
+    .update(userData)
+    .then(user => {
+      return db("users")
+        .where({ id })
+        .first();
+    });
 }
 
 function getPlantById(plantid) {
@@ -81,5 +98,7 @@ module.exports = {
   getSpecies,
   addSpecies,
   addPlant,
-  updatePlant
+  updatePlant,
+  getUserWithPassword,
+  updateUser
 };

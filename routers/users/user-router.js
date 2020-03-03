@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const bc = require("bcryptjs");
 
 // middlewares
 const { multerUpload } = require("../../api/middlewares/multer.js");
@@ -30,6 +31,33 @@ router.get("/:id", async (req, res) => {
     }
   } catch (err) {
     res.status(404).json({ error: "User not found!" });
+  }
+});
+
+// update user info
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const userData = req.body;
+
+  try {
+    const user = await Users.getUserWithPassword(id);
+    if (user) {
+      if (userData.username && userData.password && userData.phone_number) {
+        const hash = bc.hashSync(userData.password, 10);
+
+        userData.password = hash;
+
+        const updatedUser = await Users.updateUser(userData, id);
+
+        res.status(200).json(updatedUser);
+      } else {
+        res.status(400).json({ error: "Please provide required fields" });
+      }
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch ({ name, message, error }) {
+    res.status(404).json({ name, message, error });
   }
 });
 
