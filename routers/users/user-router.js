@@ -67,7 +67,7 @@ router.post(
 
       res.status(201).json(arr);
     } catch (err) {
-      res.status(200).json({ error: "test" });
+      res.status(500).json({ error: "test" });
     }
   }
 );
