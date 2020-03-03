@@ -19,7 +19,9 @@ const validateSpecies = async (req, res, next) => {
       } else {
         // add species to database if it doesn't exist
         try {
-          const addedSpecie = await Users.addSpecies(exists);
+          const addedSpecie = await Users.addSpecies({
+            name: plantData.species_name
+          });
           plantData.species_name = addedSpecie.name;
           next();
         } catch (err) {
