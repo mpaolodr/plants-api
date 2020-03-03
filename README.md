@@ -34,12 +34,12 @@
 
   **/api/users**
 
-  | Method | Endpoint             | Action                                       | Required Fields                                                                                    |
-  | :----- | :------------------- | :------------------------------------------- | :------------------------------------------------------------------------------------------------- |
-  | GET    | /:id                 | get user data                                | userid                                                                                             |
-  | GET    | /:id/plants          | get user's plants                            | userid                                                                                             |
-  | POST   | /:id/plants          | add plant to user data                       | userid, nickname(str), phone_number(str), species(str, not required), image(not required)          |
-  | GET    | /:id/plants/:plantid | get plany by id                              | userid plantid                                                                                     |
-  | PUT    | /:id/plants/:plantid | edit plant information                       | userid, plantid, nickname(str), phone_number(str), species(str, not required), image(not required) |
-  | DELETE | /:id/plants/:plantid | delete plant                                 | plantid userid                                                                                     |
-  | PUT    | /:id                 | edit user password, username or phone number | password, username, phone_number                                                                   |
+  | Method | Endpoint             | Action                                       | Required Fields                                                                                                                                         |
+  | :----- | :------------------- | :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  | GET    | /:id                 | get user data                                | userid                                                                                                                                                  |
+  | PUT    | /:id                 | edit user password, username or phone number | password, username, phone_number                                                                                                                        |
+  | GET    | /:id/plants          | get user's plants                            | userid(only used for api call)                                                                                                                          |
+  | POST   | /:id/plants          | add plant to user data                       | userid(only used for api call), nickname(str), phone_number(str), species_name(str, not required), image(not required)                                  |
+  | GET    | /:id/plants/:plantid | get plany by id                              | userid(only used for api call) plantid(only used for api call)                                                                                          |
+  | PUT    | /:id/plants/:plantid | edit plant information                       | userid(only used for api call), plantid(only used for api call), nickname(str), phone_number(str), species_name(str, not required), image(not required) |
+  | DELETE | /:id/plants/:plantid | delete plant                                 | plantid(only used for api call) userid(only used for api call)                                                                                          |
