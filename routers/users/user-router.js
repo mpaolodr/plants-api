@@ -51,6 +51,23 @@ router.get("/:id/plants", async (req, res) => {
   }
 });
 
+// get user plant by id
+router.get("/:id/plants/:plantid", async (req, res) => {
+  const { id, plantid } = req.params;
+  try {
+    const user = await Users.getUserById(id);
+    const plant = await Users.getPlantById(plantid);
+
+    if (user && plant) {
+      res.status(200).json(plant);
+    } else {
+      res.status(404).json({ error: "User or Plant Id is invalid" });
+    }
+  } catch ({ name, message, error }) {
+    res.status(500).json({ name, message, error });
+  }
+});
+
 router.post(
   "/:id/plants",
   validateId,
