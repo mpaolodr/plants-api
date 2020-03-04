@@ -30,7 +30,7 @@
   | POST   | /register | registers a new user      | username, password, phone_number |
   | POST   | /login    | signs registered users in | username, password               |
 
-* ### Userus
+* ### Users
 
   **/api/users**
 
