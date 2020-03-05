@@ -7,7 +7,7 @@ function getPlants(id) {
     .select(
       "p.id",
       "p.nickname",
-      "p.h2o_frequency as frequency",
+      "p.h2o_frequency",
       "p.image",
       "p.species_name"
     )
