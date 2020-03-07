@@ -40,6 +40,47 @@
   | PUT    | /:id                 | edit user password, username or phone number | password, username, phone_number                                                                                                                        |
   | GET    | /:id/plants          | get user's plants                            | userid(only used for api call)                                                                                                                          |
   | POST   | /:id/plants          | add plant to user data                       | userid(only used for api call), nickname(str), phone_number(str), species_name(str, not required), image(not required)                                  |
-  | GET    | /:id/plants/:plantid | get plany by id                              | userid(only used for api call) plantid(only used for api call)                                                                                          |
+  | GET    | /:id/plants/:plantid | get plant by id                              | userid(only used for api call) plantid(only used for api call)                                                                                          |
   | PUT    | /:id/plants/:plantid | edit plant information                       | userid(only used for api call), plantid(only used for api call), nickname(str), phone_number(str), species_name(str, not required), image(not required) |
   | DELETE | /:id/plants/:plantid | delete plant                                 | plantid(only used for api call) userid(only used for api call)                                                                                          |
+
+## FOR IOS
+
+user register
+
+    {
+      "username": "string",
+      "password": "string",
+      "phone_number": "string"
+    }
+
+returns:
+
+    {
+      "user": {
+        "id": integer,
+        "username": "string"
+      },
+      "token": "string"
+    }
+
+plant(multipart/form-data)
+
+    {
+      "nickname": "string",
+      "h2o_frequency": "string",
+      "species_name": "string",
+      "image": file
+    }
+
+returns:
+
+    [
+      {
+        id: integer,
+        "nickname": "string",
+        "h2o_frequency": "string",
+        "image": "string",
+        "species_name": "string"
+      }
+    ]
